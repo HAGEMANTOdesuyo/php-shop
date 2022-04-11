@@ -1,16 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>html tenplate</title>
-</head>
-<body>
 <?php
-$test='今日はいい天気ですね';
-print 'Hello, world!!'.'<br/>';
-print 'こんにちは!!' .'<br/>';
-print $test;
+$controller=$_GET['controller'];
+$parameter2=$_GET['parameter2'];
+$parameter3=$_GET['parameter3'];
+#echo $controller;
+if(empty($controller)){
+  #echo 'コントローラーが指定されていません';
+  # heaer()より前で何も出力してはいけない
+  header('Location: ./app/controllers/admin_top.php');
+  exit();
+}
+else{
+  #echo 'コントローラーは'.$controller.'です';
+  switch($controller){
+    case 'staff_list':
+      echo 'スタッフ一覧に飛びます';
+      break;
+    case 'product':
+      #echo '商品リストに飛びます';
+      header('Location: ./app/controllers/ProductController.php');
+      break;
+  }
+}
+echo '<br/>';
+echo $parameter2.'<br/>';
+echo $parameter3.'<br/>';
 ?>
-
-</body>
-</html>
