@@ -8,8 +8,8 @@
   管理者メニュー<br/><br/>
   <!--
   -->
-  <a href="../../index.php?controller=staff_list">スタッフ管理</a><br/>
-  <a href="../../index.php?controller=product">商品管理</a><br/>
+  <a href="../../index.php?controller=staff&action=list">スタッフ管理</a><br/>
+  <a href="../../index.php?controller=product&action=list">商品管理</a><br/>
   <a href="../../index_test.php?test=test">テスト</a>
 
 </body>

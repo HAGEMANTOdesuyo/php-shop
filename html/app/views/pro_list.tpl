@@ -7,7 +7,7 @@
 <body>
   商品一覧<br/><br/>
   <form method="post" action="pro_branch.php">
-    <?php foreach ($v->result_ as $row){ ?>
+    <?php foreach ($v->result as $row){ ?>
       <input type="radio" name="procode" value="<?= $row['code']; ?>">
       <?= $row['name'].'...'.$row['price'].'円'; ?><br/>
       <!--<?= var_dump($row); ?>-->

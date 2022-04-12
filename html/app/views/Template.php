@@ -1,10 +1,10 @@
 <?php
-class MyTemplate
+class Template
 {
   function show($tpl_file)
   {
     $v = $this;
-    include("../views/{$tpl_file}");
+    include("{$tpl_file}");
   }
 }
 ?>
