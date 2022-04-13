@@ -1,5 +1,5 @@
 <?php
-require '../inc/config.php';
+#require '../inc/config.php';
 #$dsn = DSN;
 #$user = USER;
 #$password = PASSWORD;
@@ -7,47 +7,34 @@ require '../inc/config.php';
 class CallMysql
 {
   #const DSN_local="mysql:dbname=shop;host=localhost;charset=utf8";
-  /*
-  private $dsn, $user, $password;
-  function __construct(){
-    $this->dsn = DSN;
-    $this->user = USER;
-    $this->password = PASSWORD;
+  # データベースに接続するメソッド
+  function connect(){
+    try
+    {
+      # コマンドライン上での確認用
+      #$dbh = new PDO('mysql:dbname=shop;host=localhost:3306;charset=utf8', USER, PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+      $dbh = new PDO(DSN, USER, PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+      $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      #echo '接続できました'."\n";
+    }
+    catch(Exception $e)
+    {
+      print 'ただいま障害により大変ご迷惑をおかけしております。';
+      echo $e->getMessage();
+      echo "\n";
+      exit();
+    }
+    return $dbh;
   }
-  function printfordebug(){
-    echo self::DSN_local;
-  }
-  */
-
-function connect(){
-  try
-  {
-    $dbh = new PDO(DSN, USER, PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-    $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo '接続できました'."\n";
-  }
-  catch(Exception $e)
-  {
-    print 'ただいま障害により大変ご迷惑をおかけしております。';
-    echo $e->getMessage();
-    echo "\n";
-    exit();
-  }
-}
-/*
-    $sql = 'SELECT code,name,price FROM mst_product WHERE 1';
-    $stmt = $dbh->prepare($sql);
+# SELECT文を使用する時のメソッド
+  function select($sql){
+    $dbh_ = $this->connect();
+    $stmt=$dbh_->prepare($sql);
     $stmt->execute();
-
-    $dbh = null;
-
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //var_dump($result);
+    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    $dbh_=null;
+    return $result;
   }
-  */
 }
-$obj=new CallMysql;
-$obj->connect();
-#$obj->printfordebug();
 ?>
