@@ -50,34 +50,13 @@ if($pro_gazou['size'] > 0){
     print '<br/>';
   }
 }
+
+$tpl=new Template();
+$tpl->pro_name=$pro_name;
+$tpl->pro_price=$pro_price;
+$tpl->pro_gazou=$pro_gazou;
+$tpl->check_proname=$check_proname;
+$tpl->check_proprice=$check_proprice;
+$tpl->show('pro_add_check.tpl');
+
 ?>
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ろくまる農園</title>
-</head>
-<body>
-<?= $check_proname; ?>
-<?= $check_proprice; ?>
-  <?php # 入力欄に問題があれば、戻るボタンを表示する
-  if ($pro_name==''||preg_match('/\A[0-9]+\z/', $pro_price)==0||$pro_gazou['size'] > 1000000) { ?>
-    <form>
-      <input type="button" onclick="history.back()" value="戻る">
-    </form>
-  <?php }else{
-    # 入力に問題がなければ、「OK」ボタンと「戻る」ボタンを表示する。
-    # 「OK」ボタンをクリックされたら、データを連れて次の画面staff_add_done.phpへ飛ぶ
-  ?>
-    上記の商品を追加します。<br/>
-    <form method="post" action="pro_add_done.php">
-      <input type="hidden" name="name" value="<?= $pro_name; ?>">
-      <input type="hidden" name="price" value="<?= $pro_price; ?>"> <br/>
-      <input type="hidden" name="gazou_name" value="<?= $pro_gazou['name']; ?>"> <br/>
-      <input type="button" onclick="history.back()" value="戻る">
-      <input type="submit" value="OK">
-    </form>
-  <?php } ?>
-
-</body>
-</html>

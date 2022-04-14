@@ -7,12 +7,12 @@
 <body>
   商品情報参照<br/><br/>
   商品コード<br/>
-  <?= $pro_code; ?><br/>
+  <?= $v->procode; ?><br/>
   商品名<br/>
-  <?= $pro_name; ?><br/>
+  <?= $v->pro_name; ?><br/>
   価格<br/>
-  <?= $pro_price.'円'; ?><br/><br/>
-  <?= $disp_gazou; ?><br/>
+  <?= $v->pro_price.'円'; ?><br/><br/>
+  <?= $v->disp_gazou; ?><br/>
 
   <form>
     <input type="button" onclick="history.back()" value="戻る">

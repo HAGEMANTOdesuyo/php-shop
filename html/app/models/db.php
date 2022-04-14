@@ -28,11 +28,21 @@ class CallMysql
     return $dbh;
   }
 # SELECT文を使用する時のメソッド
-  function select($sql){
+  function select($sql_para){
+    $sql=$sql_para['sql'];
     $dbh_ = $this->connect();
     $stmt=$dbh_->prepare($sql);
-    $stmt->execute();
+    if(!empty($sql_para['procode']))
+    {# executeに渡すパラメータがありとなしで分岐
+      $data[]=$sql_para['procode'];
+      $stmt->execute($data);
+    }else
+    {
+      $stmt->execute();
+    }
+    #var_dump($sql);
     $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    #var_dump($result);
     $dbh_=null;
     return $result;
   }

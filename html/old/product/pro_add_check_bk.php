@@ -6,50 +6,9 @@ $pro_name=$_POST['name'];
 $pro_price=$_POST['price'];
 $pro_gazou=$_FILES['gazou'];
 
-$pro_neme= htmlspecialchars($pro_name,ENT_QUOTES,'UTF-8');
-$pro_pass= htmlspecialchars($pro_pass,ENT_QUOTES,'UTF-8');
+$pro_neme= htmlspecialchars($staff_name,ENT_QUOTES,'UTF-8');
+$pro_pass= htmlspecialchars($staff_pass,ENT_QUOTES,'UTF-8');
 
-function check_proname($pro_name)
-{
-  if($pro_name=='')# 商品名が入力されているかの確認処理
-  {
-    $result='商品名が入力されていません。<br/>';
-  }
-  else
-  {
-    $result='商品名：='.$pro_name.'<br/>';
-  }
-  return $result;
-}
-function check_proprice($pro_price)
-{
-  if(preg_match('/\A[0-9]+\z/', $pro_price)==0)
-  {
-    $result='価格をきちんと入力してください。'.'<br/>';
-  }
-  else
-  {
-    $result='価格：'.$pro_price.' 円<br/>';
-  }
-  return $result;
-}
-
-$check_proname=check_proname($pro_name);
-$check_proprice=check_proprice($pro_price);
-
-
-# 画像が選択されたかどうか、サイズが大きすぎないかの確認
-if($pro_gazou['size'] > 0){
-  if($pro_gazou['size'] > 1000000)
-  {
-    print '画像が大きすぎます。'.'<br/>';
-  }else
-  {
-    move_uploaded_file($pro_gazou['tmp_name'],'./gazou/'.$pro_gazou['name']);
-    print '<img src="./gazou/'.$pro_gazou['name'].'">';
-    print '<br/>';
-  }
-}
 ?>
 
 <html>
@@ -58,8 +17,31 @@ if($pro_gazou['size'] > 0){
 <title>ろくまる農園</title>
 </head>
 <body>
-<?= $check_proname; ?>
-<?= $check_proprice; ?>
+  <?php # 商品名が入力されているかの確認処理
+  if($pro_name=='') { ?>
+    商品名が入力されていません。<br/>
+  <?php }else{ ?>
+    商品名：<?= $pro_name; ?><br/>
+  <?php } ?>
+  <!--ここまで-->
+  <?php # 価格の確認処理
+  if(preg_match('/\A[0-9]+\z/', $pro_price)==0){ ?>
+    価格をきちんと入力してください。<br/>
+  <?php }else{ ?>
+    価格：<?= $pro_price; ?>円<br/>
+  <?php }?>
+  <?php
+  # 画像が選択されたかどうか、サイズが大きすぎないかの確認
+  if($pro_gazou['size'] > 0){
+    if($pro_gazou['size'] > 1000000){
+      print '画像が大きすぎます。';
+    }else{
+      move_uploaded_file($pro_gazou['tmp_name'],'./gazou/'.$pro_gazou['name']);
+      print '<img src="./gazou/'.$pro_gazou['name'].'">';
+      print '<br/>';
+    }
+  }
+  ?>
   <?php # 入力欄に問題があれば、戻るボタンを表示する
   if ($pro_name==''||preg_match('/\A[0-9]+\z/', $pro_price)==0||$pro_gazou['size'] > 1000000) { ?>
     <form>

@@ -14,10 +14,10 @@
       <!--<?= var_dump($row); ?>-->
     <?php } ?>
     <br/>
-    <input type="submit" name="action_disp" value="参照">
-    <input type="submit" name="action_add" value="追加">
-    <input type="submit" name="action_edit" value="修正">
-    <input type="submit" name="action_delete" value="削除">
+    <input type="submit" name="action=disp" value="参照">
+    <input type="submit" name="action=add" value="追加">
+    <input type="submit" name="action=edit" value="修正">
+    <input type="submit" name="action=delete" value="削除">
   </form>
 
 </body>
