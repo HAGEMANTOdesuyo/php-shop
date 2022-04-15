@@ -39,21 +39,40 @@ if(!empty($_POST))
       #echo 'controller='.$value.'<br/>';
       $location1=$location1.'&'."$key=$value";
     }
-    if($key=='procode'||$key=='name'||$key=='price')
+    if($key=='procode'||$key=='pro_name'||$key=='pro_price'||$key=='pro_gazou_name')
     {
       $location2=$location2.'&'."$key=$value";
     }
   }
+  if(!empty($_FILES))
+  {
+    #var_dump($_FILES);
+    #exit();
+    $pro_gazou=$_FILES['pro_gazou'];
+    $pro_gazou_name=$pro_gazou['name'];
+    # 画像が選択されたかどうか、サイズが大きすぎないかの確認
+    if($pro_gazou['size'] > 0){
+      if($pro_gazou['size'] > 1000000)
+      {
+        print '画像が大きすぎます。'.'<br/>';
+      }else
+      {
+        move_uploaded_file($pro_gazou['tmp_name'],'./app/views/gazou/'.$pro_gazou['name']);
+        #print '<img src="./gazou/'.$pro_gazou['name'].'">';
+        #print '<br/>';
+      }
+    }
+    #echo $pro_gazou_name;
+    $location3='&pro_gazou_name='.$pro_gazou_name;
+    #exit();
+  }
   $location1=str_replace('?&','?',$location1);
-  $location=$location1.$location2;
+  $location=$location1.$location2.$location3;
   #echo $location.'<br/>';
   header('Location:'.$location);
   exit();
 }
 if(empty($controller)){
-  #echo 'コントローラーが指定されていません';
-  # 個々の処理は、できればController等に渡したい
-  # 管理者と閲覧者をどうやってわけるかが決まるまでは保留
   $tpl = new Template();
   $tpl->show('./app/views/admin_top.tpl');
   exit();
@@ -90,6 +109,10 @@ else{
       #require_once './app/controllers/pro_add_check.php';
       $ctl=new ProductADD;
       $ctl->pro_add_check();
+      break;
+    case 'add_done':
+      $ctl=new ProductADD;
+      $ctl->pro_add_done();
       break;
     case 'edit':
       echo '修正画面に飛びます';

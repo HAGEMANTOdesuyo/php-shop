@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>html template</title>
+<title>php農園</title>
 </head>
 <body>
   商品情報参照<br/><br/>

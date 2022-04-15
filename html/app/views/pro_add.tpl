@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ろくまる農園</title>
+<title>php農園</title>
 </head>
 <body>
 
@@ -15,11 +15,11 @@
   -->
     <input type="hidden" name="controller" value="product">
     商品名を入力してください。<br/>
-    <input type="text" name="name" style="width:200px"><br/>
+    <input type="text" name="pro_name" style="width:200px"><br/>
     価格を入力してください。<br/>
-    <input type="text" name="price" style="width:50px"><br/>
+    <input type="text" name="pro_price" style="width:50px"><br/>
     画像を選んでください。<br/>
-    <input type="file" name="gazou" style="width:400px"><br/>
+    <input type="file" name="pro_gazou" style="width:400px"><br/>
     <br/>
     <input type="button" onclick="history.back()" value="戻る">
     <input type="submit" name="action=add_check" value="OK">

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ろくまる農園</title>
+<title>php農園</title>
 </head>
 <body>
   管理者メニュー<br/><br/>

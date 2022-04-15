@@ -28,10 +28,11 @@ class CallMysql
     return $dbh;
   }
 # SELECT文を使用する時のメソッド
-  function select($sql_para){
+  function select($sql_para)
+  {
     $sql=$sql_para['sql'];
-    $dbh_ = $this->connect();
-    $stmt=$dbh_->prepare($sql);
+    $dbh = $this->connect();
+    $stmt=$dbh->prepare($sql);
     if(!empty($sql_para['procode']))
     {# executeに渡すパラメータがありとなしで分岐
       $data[]=$sql_para['procode'];
@@ -43,7 +44,24 @@ class CallMysql
     #var_dump($sql);
     $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
     #var_dump($result);
-    $dbh_=null;
+    $dbh=null;
+    return $result;
+  }
+# INSERT文を使用する時のメソッド
+  function insert($sql_para)
+  {
+    $sql=$sql_para['sql'];
+    #var_dump($sql_para);
+    $dbh = $this->connect();
+    $stmt=$dbh->prepare($sql);
+    $data[]=$sql_para['pro_name'];
+    $data[]=$sql_para['pro_price'];
+    $data[]=$sql_para['pro_gazou_name'];
+    $stmt->execute($data);
+    #var_dump($sql);
+    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    #var_dump($result);
+    $dbh=null;
     return $result;
   }
 }
